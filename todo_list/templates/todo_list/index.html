@@ -1,10 +1,55 @@
-<h1> INDEX </h1>
+{% extends 'todo_list/base.html' %}
 
-{% if todos %}
-    {% for todo in todos %}
-        <p>{{ todo.name }}</p>
-    {% endfor %}
+{% block content %}
 
-{% else %}
-    <p>Não há listas cadastradas :(</p>
-{% endif %}
+<div class="container">
+    <h1 class="text-center">Minhas Listas de Tarefas</h1>
+
+    <div>
+        <p align="right">
+            <a class="btn btn-primary" href="{% url 'todo_list:create' %}">
+                Criar Nova Lista
+            </a>
+        </p>
+    </div>
+
+    {% if todos %}
+        <table class="table table-striped">
+            <tr class="table-primary">
+                <th>Listas</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        
+        {% for todo in todos %}
+            <tr>
+                <td>{{ todo.name }}</td>
+                <td>
+                    <a href="{% url 'todo_list:detail' todo.id %}" class="btn btn-primary">
+                        Abrir
+                    </a>
+                </td>
+                <td>
+                    <a href="{% url 'todo_list:update' todo.id %}" class="btn btn-primary">
+                        Editar
+                    </a>
+                </td>
+                <td>
+                    <form action="{% url 'todo_list:delete' todo.id %}" method="post">
+                        {% csrf_token %}
+                        <input class="btn btn-danger" type="submit" value="Deletar" />
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+    
+    {% else %}
+        <p>Não há listas cadastradas :(</p>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

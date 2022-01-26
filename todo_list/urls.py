@@ -3,10 +3,14 @@ from todo_list import views
 
 app_name = "todo_list"
 
-urlpatterns = [ 
+urlpatterns = [
+    # Lists
     path("", views.ToDoListIndexView.as_view(), name='index'),
     path("<int:pk>/", views.ToDoListDetailView.as_view(), name='detail'),
     path("create/", views.ToDoListCreateView.as_view(), name='create'),
     path("<int:pk>/delete/", views.ToDoListDeleteView.as_view(), name='delete'),
     path("<int:pk>/update/", views.ToDoListUpdateView.as_view(), name='update'),
+
+    # Tasks
+    path("<int:list_pk>/tasks/create/", views.ToDoTaskCreateView.as_view(), name='task_create'),
 ]

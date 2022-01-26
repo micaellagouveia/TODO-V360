@@ -5,3 +5,7 @@ from .todo_list_views import (
     ToDoListDeleteView,
     ToDoListUpdateView,
 )
+
+from .todo_task_views import (
+    ToDoTaskCreateView,
+)

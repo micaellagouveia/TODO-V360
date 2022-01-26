@@ -1,0 +1,17 @@
+<h1>CREATE</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {% for field in form.visible_fields %}
+    <div>
+        <label for="{{ field.id_for_label }}">{{field.label}}</label>
+        {{field}}
+        {% for error in field.erros %}
+            <span>{{erro}}</span>
+        {% endfor %}
+    </div>
+    {% endfor %}
+
+    <button type="submit">Criar</button>
+    <a href="{% url 'todo_list:index'%}">Cancelar</a>
+</form>

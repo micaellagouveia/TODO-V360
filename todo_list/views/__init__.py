@@ -8,4 +8,6 @@ from .todo_list_views import (
 
 from .todo_task_views import (
     ToDoTaskCreateView,
+    ToDoTaskUpdateView,
+    ToDoTaskDeleteView,
 )

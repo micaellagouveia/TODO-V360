@@ -10,4 +10,5 @@ from .todo_task_views import (
     ToDoTaskCreateView,
     ToDoTaskUpdateView,
     ToDoTaskDeleteView,
+    task_done_action,
 )

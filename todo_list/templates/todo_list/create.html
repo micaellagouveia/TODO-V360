@@ -1,9 +1,20 @@
-<h1>CREATE</h1>
+{% extends 'todo_list/base.html' %}
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
+{% load crispy_forms_tags %}
 
-    <button type="submit">Criar</button>
-    <a href="{% url 'todo_list:index'%}">Cancelar</a>
-</form>
+{% block content %}
+<div class="container">
+    <h2 class="text-center">Criar Nova Lista de Tarefas</h2>
+
+    <form action="{% url 'todo_list:create' %}" method="post">
+        {% csrf_token %}
+
+        {{ form | crispy }}
+
+        <div class="col-md-12 text-center">
+            <button type="submit" class="btn btn-primary">Criar Lista</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

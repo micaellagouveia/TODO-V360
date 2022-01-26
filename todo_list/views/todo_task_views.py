@@ -37,3 +37,13 @@ class ToDoTaskUpdateView(ToDoTaskNestedMixin, generic.UpdateView):
 
 class ToDoTaskDeleteView(ToDoTaskNestedMixin, generic.DeleteView):
     model = ToDoTask
+
+
+def task_done_action(request, list_pk, task_pk):
+    todo_list = ToDoList.objects.get(pk=list_pk)
+    task = ToDoTask.objects.get(pk=task_pk, todo_list=todo_list)
+
+    task.done = True
+    task.save()
+
+    return redirect(reverse('todo_list:detail', args=(list_pk)))

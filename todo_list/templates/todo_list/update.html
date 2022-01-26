@@ -1,8 +1,21 @@
-<h1>UPDATE</h1>
+{% extends 'todo_list/base.html' %}
 
+{% load crispy_forms_tags %}
 
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Update">
-</form>
+{% block content %}
+<div class="container">
+
+    <h2 class="text-center">Editar Lista de Tarefas</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form  | crispy}}
+
+        <div class="col-md-12 text-center">
+        <button type="submit" class="btn btn-warning">Editar Lista</button>
+    </div>
+    </form>
+
+</div>
+
+{% endblock %}

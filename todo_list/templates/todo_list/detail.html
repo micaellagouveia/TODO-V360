@@ -1,6 +1,84 @@
-<h1>DETAIL</h1>
+{% extends 'todo_list/base.html' %}
 
-<h2>{{ todo.name }}</h2>
+{% block content %}
 
-<p>{{ todo.description }}</p>
-<p>{{ todo.due_date }}</p>
+
+    <div class="container">
+        <h2 class="text-center">{{ todo.name }}</h2>
+
+        <p align="right">
+
+            <a class="btn btn-primary" 
+               href="{% url 'todo_list:task_create' todo.pk %}"
+            >
+                Criar Nova task
+            </a>
+        </p>
+    
+
+    {% if todo.tasks.exists %}
+
+        
+        <table class="table table-striped">
+            <tr class="table-primary">
+                <th></th>
+                <th>Nome das tasks</th>
+                <th></th>
+                <th></th>
+            </tr>
+
+            {% for task in todo.tasks.all %}
+                <tr>
+                    <td>
+                        {% if task.done %}
+                        <p>✅</p>
+                        {% else %}
+                        <p>
+                            <a href="{% url 'todo_list:task_done_action' task.todo_list.id task.id %}">
+                                🔲
+                            </a>
+                        </p>
+                        {% endif %}
+                    </td>
+                    
+                    <td>
+                        {% if task.done %}
+                        <s> {{ task.description }} </s>
+                        {% else %}
+                            {{ task.description }}
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        <a href="{% url 'todo_list:task_update' task.todo_list.id task.id %}"
+                        class="btn btn-primary"
+                        >
+                            Editar task
+                        </a>
+                    </td>
+
+                    <td>
+                        <form action="{% url 'todo_list:task_delete' task.todo_list.id task.id %}" 
+                            method="post"
+                        >
+                            {% csrf_token %}
+                            <input class="btn btn-danger" 
+                                   type="submit" 
+                                   value="Deletar task" 
+                            />
+                        </form>
+
+                    </td>
+
+
+
+                </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+
+    {% else %}
+        <h3 class="text-center">Esta lista não possui tasks!</h3>
+    {% endif %}
+{% endblock %}

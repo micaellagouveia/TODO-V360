@@ -1,0 +1,10 @@
+<h1> INDEX </h1>
+
+{% if todos %}
+    {% for todo in todos %}
+        <p>{{ todo.name }}</p>
+    {% endfor %}
+
+{% else %}
+    <p>Não há listas cadastradas :(</p>
+{% endif %}

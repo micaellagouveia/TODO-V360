@@ -31,7 +31,7 @@
                 <tr>
                     <td>
                         {% if task.done %}
-                        <p>✅</p>
+                        <p>✔️</p>
                         {% else %}
                         <p>
                             <a href="{% url 'todo_list:task_done_action' task.todo_list.id task.id %}">

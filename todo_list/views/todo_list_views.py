@@ -10,23 +10,23 @@ class ToDoListIndexView(generic.ListView):
     template_name = "todo_list/index.html"
     context_object_name = "todos"
 
-class ToDoListDetailView(generic.DetailView):
-    model = ToDoList
-    template_name = "todo_list/detail.html"
-    context_object_name = "todo"
-
 class ToDoListCreateView(generic.CreateView):
     model = ToDoList
     form_class = ToDoListForm
     template_name = 'todo_list/create.html'
     success_url = reverse_lazy('todo_list:index')
 
-class ToDoListDeleteView(generic.DeleteView):
-    model = ToDoList
-    success_url ="/"
-
 class ToDoListUpdateView(generic.UpdateView):
     model = ToDoList
     form_class = ToDoListForm
     template_name = "todo_list/update.html"
-    success_url ="/"
+    success_url = reverse_lazy('todo_list:index')
+
+class ToDoListDeleteView(generic.DeleteView):
+    model = ToDoList
+    success_url = reverse_lazy('todo_list:index')
+
+class ToDoListDetailView(generic.DetailView):
+    model = ToDoList
+    template_name = "todo_list/detail.html"
+    context_object_name = "todo"
